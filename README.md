@@ -8,4 +8,3 @@ Repositório dedicado ao Projeto de GDI
 * [Thiago Jose Grangeiro Costa (tjgc)](https://github.com/Strateago)
 * [Victória Xavier Queiroz (vxq)](https://github.com/victoriaxq)
 
-oiii
