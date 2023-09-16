@@ -1,0 +1,1 @@
+-- VERIFICAR O SALÁRIO
