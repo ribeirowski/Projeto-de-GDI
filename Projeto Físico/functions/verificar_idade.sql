@@ -18,7 +18,6 @@ BEGIN
 
     RETURN IDADE;
 END;
-/
 
 -- --eXECUNTANDO
 -- DECLARE
