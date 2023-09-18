@@ -42,37 +42,24 @@ WHERE P.CPF IN (SELECT C.CPF FROM CAPITAO C);
 
 -- CONSULTA 7 (Subconsulta do tipo linha CAPITAO, QTD DE PETS DELE, QTD DE TERRITORIO):
 SELECT P.NOME, (SELECT COUNT(*) FROM PET
-                WHERE CPF_DONO = P.CPF) AS QTD_PETS, (SELECT COUNT(*)
-                                                      FROM TERRITORIO WHERE CPF_CAPITAO = P.CPF) AS QTD_TERRITORIOS
-FROM PIRATA P WHERE P.CPF IN (SELECT C.CPF
-                              FROM CAPITAO C
-                              WHERE C.CPF = '003');
+                WHERE CPF_DONO = P.CPF) AS QTD_PETS, (SELECT COUNT(*) FROM TERRITORIO WHERE CPF_CAPITAO = P.CPF) AS QTD_TERRITORIOS
+FROM PIRATA P WHERE P.CPF IN (SELECT C.CPF FROM CAPITAO C WHERE C.CPF = '003');
 
---Quantidade de expedições que o marinheiro com o maior salario participou 
-
-select 
-    COUNT(0)
-from EXPEDICAO E
-where E.CPF = (select
-                CPF
-               from (select 
-                        M.CPF,
-                        M.SALARIO
-                     from MARINHEIRO M
-                     ORDER BY SALARIO DESC)
-                where rownum = 1)
+--CONSULTA 8 (SUBCONSULTA TABELA QTD DE EXPEDIÇÕES DO MARINHEIRO COM MAIOR SALÁRIO): 
+SELECT COUNT(0)
+FROM EXPEDICAO E
+WHERE E.CPF = (SELECT CPF 
+                FROM (SELECT M.CPF, M.SALARIO FROM MARINHEIRO M ORDER BY SALARIO DESC) 
+                WHERE ROWNUM = 1);
 
 -- CONSULTA 8 (Subconsulta do tipo tabela ): --TIRAR ROWNUM (ELE NÃO VIU EM SALA)
 
 
 
--- CONSULTA 9 (Operação de conjunto):
-
-SELECT
-    *
+-- CONSULTA 9 (OPERAÇÃO DE CONJUNTOS):
+SELECT *
 FROM MARINHEIRO
-EXCEPT --VIU EM SALA 
-SELECT 
-    *
+EXCEPT
+SELECT *
 FROM MARINHEIRO M 
-WHERE M.CPF NOT IN (SELECT DISTINCT CPF FROM EXPEDICAO)
+WHERE M.CPF NOT IN (SELECT DISTINCT CPF FROM EXPEDICAO);
